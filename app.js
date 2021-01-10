@@ -3,9 +3,9 @@ const todoInput = document.querySelector('.todo-input');
 const todoButton = document.querySelector('.todo-button');
 const todoList = document.querySelector('.todo-list');
 
-
 //*Event Listner
 todoButton.addEventListener("click",addTodo);
+todoList.addEventListener('click' , deleteCheck  );
 
 function addTodo(event)
 {
@@ -37,7 +37,30 @@ function addTodo(event)
     //*appending to the Html page
     todoList.appendChild(todoDiv);
 
-    // *clear form input value 
+    // *Delete form input value 
     todoInput.value = '';
+}
+function deleteCheck(e)
+{
+    const item = e.target;
+    // DELETE 
+    if(item.classList[0] === 'trash-btn')
+    {
+        const todo = item.parentElement;
+        //Animation
+        todo.classList.add("fall");
+        todo.addEventListener("transitionEnd", function()
+        {
+        todo.remove();
+        });
+    }
+
+    // CHECK 
+    if(item.classList[0] === 'completed-btn')
+    {
+        const todo = item.parentElement;
+        todo.classList.toggle('completed');
+    }
+    TODO /*want to fix bug in adding todo completed class and want to fix while class fall*/ 
 
 }
